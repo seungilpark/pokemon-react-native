@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, Alert} from "react-native";
 
 import CustomText from "../components/CustomText";
 import { Audio } from "expo";
@@ -9,13 +9,13 @@ export default class LoginScreen extends Component {
     header: null
   };
 
-  state = {
-    username: ""
-  };
-
   constructor(props) {
     super(props);
     this.backgroundSound = null;
+    this.state = {
+      username: "",
+      inputvisiable: false
+    }
   };
 
   async componentDidMount() {
@@ -41,21 +41,30 @@ export default class LoginScreen extends Component {
         </View>
 
         <View style={styles.main}>
-          <CustomText styles={styles.label}>Enter username</CustomText>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={username => this.setState({ username })}
-            value={this.state.username}
-          />
-
-          <TouchableOpacity onPress={this.login} style={styles.button}>
-            <CustomText styles={styles.buttonText}>Sign in</CustomText>
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={this.gotodex} style={styles.button}>
+          <TouchableOpacity onPress={() => this.setState({inputvisiable: true})} style={[styles.buttonContainer, styles.loginButton]}>
             <CustomText styles={styles.buttonText}>Pokémon Dex</CustomText>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.gotomap} style={styles.button}>
+          {this.state.inputvisiable && (
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Enter Username"
+                onChangeText={username => this.setState({ username: username })}
+                value={this.state.username}
+              />
+              
+            </View>
+          )}
+          {this.state.inputvisiable && (
+            <TouchableOpacity onPress={this.login} style={styles.button}>
+             <CustomText styles={styles.SigninText}>Sign in</CustomText>
+            </TouchableOpacity>
+          )}
+
+          <TouchableOpacity onPress={this.gotodex} style={[styles.buttonContainer, styles.loginButton]}>
+            <CustomText styles={styles.buttonText}>Pokémon Dex</CustomText>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.gotomap} style={[styles.buttonContainer, styles.loginButton]}>
             <CustomText styles={styles.buttonText}>Pokémon Map</CustomText>
           </TouchableOpacity>
         </View>
@@ -71,6 +80,8 @@ export default class LoginScreen extends Component {
         username
       });
       this.backgroundSound.stopAsync();
+    } else {
+      Alert.alert("Invalid Username", "Please enter a username")
     }
   };
 
@@ -89,11 +100,15 @@ export default class LoginScreen extends Component {
 
   
 
-const styles = {
+
+
+const styles = StyleSheet.create({
   container: {
     flex: 10,
     padding: 20,
-    backgroundColor: "#FFF"
+    backgroundColor: "#FFF",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   top: {
     flex: 4,
@@ -109,24 +124,49 @@ const styles = {
     flex: 6,
     justifyContent: "flex-start"
   },
-  label: {
-    fontSize: 16
+  inputContainer: {
+      borderBottomColor: '#F5FCFF',
+      backgroundColor: '#DCDCDC',
+      borderRadius:30,
+      borderColor: "#ccc",
+      borderWidth: 1,
+      backgroundColor: "#eaeaea",
+      padding: 5,
+      borderBottomWidth: 1,
+      width:250,
+      height:45,
+      marginBottom:10,
+      flexDirection: 'row',
+      alignItems:'center'
   },
-  textInput: {
-    height: 40,
-    marginTop: 5,
-    marginBottom: 10,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    backgroundColor: "#eaeaea",
-    padding: 5
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
   },
   button: {
     alignSelf: "center",
-    marginTop: 10
+    marginBottom: 10,
   },
-  buttonText: {
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:30,
+    width:250,
+    borderRadius:30,
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+  },
+  loginText: {
+    color: 'white',
+  },
+  SigninText: {
     fontSize: 18,
     color: "#05a5d1"
-  }
-};
+  },
+});
+ 
