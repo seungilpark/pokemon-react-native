@@ -57,7 +57,7 @@ class PokemonList extends Component {
             onPress={ this.refreshFilter.bind(this) }
             style={{backgroundColor: "#00b5ec"}}
         >
-            <Text style={{ color: "#263238", fontWeight: "bold" }}>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>
             Refresh Filter
             </Text>
       </Button>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         flexDirection: 'row',
         alignItems:'center',
-        left: "5%",
+        left: 75,
         marginTop: 25,
         marginBottom: 25,
     },

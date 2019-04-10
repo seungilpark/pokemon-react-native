@@ -13,6 +13,7 @@ class AppHeader extends Component {
               fontSize: 22,
               bottom: "50%",
               fontWeight: "bold",
+              color: "#fff"
             }
           }
         }
