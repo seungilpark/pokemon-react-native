@@ -4,6 +4,24 @@ import {ListItem} from "react-native-elements"
 
 class PokemonList extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            pokemons: this.props.pokemons
+        }
+      }
+
+      filterSearch(text){
+        const filteredPokemons = this.state.pokemons.filter((pokemon)=>{
+          const pokemons = pokemon.name.toLowerCase()
+          const textInput = text.toLowerCase()
+          return pokemons.indexOf(textInput) > -1
+        });
+        this.setState({
+          pokemons: filteredPokemons
+        });
+      }
+
   render() {
     return (
       <View> 

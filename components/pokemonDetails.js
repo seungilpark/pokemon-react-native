@@ -1,8 +1,9 @@
 import React, {Component} from "react"
-import {Image} from "react-native"
+import {Image, StyleSheet} from "react-native"
 import { Col, Row, Grid } from "react-native-easy-grid"
-import { Container, Content, Text, Icon, List, ListItem, Fab } from "native-base"
+import { Container, Content, Text, Icon, Fab, Button } from "native-base"
 import  Modal  from "react-native-modal"
+import {ListItem} from "react-native-elements"
 
 class PokemonDetails extends Component {
 
@@ -12,6 +13,7 @@ class PokemonDetails extends Component {
       images: {},
       weight: "",
       name: "",
+      height: "",
       abilities: []
     }
   }
@@ -26,7 +28,8 @@ class PokemonDetails extends Component {
         images: pokemonDetails.sprites,
         weight: pokemonDetails.weight,
         name: pokemonDetails.name,
-        abilities: pokemonDetails.abilities
+        abilities: pokemonDetails.abilities,
+        height: pokemonDetails.height,
       })
     }
   }
@@ -37,6 +40,7 @@ class PokemonDetails extends Component {
     const weight = this.state.weight
     const abilities = this.state.abilities
     const image = this.state.images
+    const height = this.state.height
     return (
       <Modal
         animationType="slide"
@@ -46,7 +50,7 @@ class PokemonDetails extends Component {
         onRequestClose={() => this.props.setDetailModelVisibility(false)}>
         <Container>
           <Content>
-            <Grid>
+            <Grid style={{marginTop: 20}}>
               <Row style={{ backgroundColor: "#263238"}}>
                 <Image source={{uri: image.front_default}} style={{height: 200, width: 200, flex: 1}}/>
                 <Text textAlign = 'center' style= {{
@@ -59,38 +63,38 @@ class PokemonDetails extends Component {
               </Row>
               <Row style={{ backgroundColor: "#FFF"}}>
                 <Col>
-                  <List>
-                    <ListItem itemHeader>
-                      <Text>WEIGHT</Text>
-                    </ListItem>
-                    <ListItem>
-                      <Text>{weight}</Text>
-                    </ListItem>
-                  </List>
+                    <Button bordered success style={{marginTop: 15}}>
+                        <Text>WEIGHT: {weight}</Text>
+                    </Button>
+                    
                 </Col>
                 <Col>
-                  <List>
-                    <ListItem itemHeader>
-                      <Text>ABILITIES</Text>
-                    </ListItem>
-                    {
-                      abilities.map((a, i) => (
-                        <ListItem key={i}>
-                          <Text>
-                            {a.ability.name}
-                          </Text>
-                        </ListItem>))
-                    }
-                  </List>
+                  
+                <Button bordered success style={{marginTop: 15, right: -30}}>
+                    <Text>HEIGHT: {height}</Text>
+                </Button>
                 </Col>
               </Row>
+              <Text style={{fontSize: 24, fontWeight: "bold", marginTop: 50 }}>ABILITIES:</Text>
+                {
+                abilities.map((a, i) => (
+                <ListItem
+                    button
+                    roundAvatar
+                    key={i}
+                    title={a.ability.name}
+                    bottomDivider={true}
+                    titleStyle={{textAlign: "center", fontSize: 20}}
+                    leftAvatar={{ source: require("../assets/ability-icon.png") }}
+                />))
+                }
             </Grid>
           </Content>
           <Fab
             active={false}
             direction="up"
             containerStyle={{ }}
-            style={{ backgroundColor: "#EEAC57" }}
+            style={{ backgroundColor: "#00b5ec" }}
             position="bottomRight"
             onPress={() => this.props.setDetailModelVisibility(false)}>
             <Icon name="close" style={{ color: "#263238"  }}/>

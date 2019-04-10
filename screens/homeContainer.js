@@ -77,7 +77,7 @@ class HomeContainer extends Component {
         <View style={styles.inputContainer}>
             <TextInput
             style={styles.inputs}
-            placeholder="Search for pokemon"
+            placeholder="Add pokemon"
             />
         </View>
         <ScrollView style={{flex:1}}>
