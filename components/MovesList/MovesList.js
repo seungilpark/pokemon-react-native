@@ -90,11 +90,6 @@ class MovesList extends Component {
         "Game Over!",
         "You Win!",
         [
-          {
-            text: 'Play Again',
-            onPress: () => navigation.navigate("Login"),
-            style: 'cancel',
-          },
           {text: 'Back to Home Page', onPress: () => navigation.navigate("Login")},
         ],
         { cancelable: false}

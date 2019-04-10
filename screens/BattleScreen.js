@@ -176,11 +176,6 @@ class BattleScreen extends Component {
             "Game Over!",
             "You lose!",
             [
-              {
-                text: 'Play Again',
-                onPress: () => navigation.navigate("Login"),
-                style: 'cancel',
-              },
               {text: 'Back to Home Page', onPress: () => navigation.navigate("Login")},
             ],
             { cancelable: false}
