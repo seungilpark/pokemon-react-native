@@ -24,8 +24,8 @@ export default class LoginScreen extends Component {
       await this.backgroundSound.loadAsync(
         require("../assets/sounds/background/opening.mp3")
       );
-      await this.backgroundSound.setIsLoopingAsync(true); // make the sound loop after it's done playing
-      await this.backgroundSound.playAsync(); // start playing the sound
+      await this.backgroundSound.setIsLoopingAsync(true); 
+      await this.backgroundSound.playAsync(); 
     } catch (error) {
       console.log("error loading background sound: ", error);
     }

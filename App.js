@@ -13,8 +13,8 @@ import Reactotron from "reactotron-react-native";
 import { reactotronRedux } from "reactotron-redux";
 
 
-// to async call enhance the store by applicaying thunk middleware
-Reactotron.configure({ host: "YOUR_INTERNAL_IP_ADDRESS" }) // example: 192.168.254.108
+
+Reactotron.configure({ host: "YOUR_INTERNAL_IP_ADDRESS" }) 
   .useReactNative()
   .use(reactotronRedux())
   .connect();

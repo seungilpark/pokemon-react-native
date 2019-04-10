@@ -82,7 +82,7 @@ class TeamSelectionScreen extends Component {
   confirmTeam = () => {
     const { selected_pokemon, setTeam, setPokemon, navigation} = this.props;
 
-    let team = selected_pokemon.slice(0); // the array which stores the data for the Pokemon team selected by the user
+    let team = selected_pokemon.slice(0); 
     let pokemon_ids = [];
     let team_member_ids = [];
     team = team.map(item => {
@@ -101,22 +101,22 @@ class TeamSelectionScreen extends Component {
 
       return {
         ...item,
-        team_member_id: member_id, // unique ID for identifying each Pokemon in the team
-        current_hp: hp, // current HP. This gets updated when an opponent Pokemon attacks
+        team_member_id: member_id, 
+        current_hp: hp, 
         total_hp: hp,
         moves: moves,
-        is_selected: false // no longer needed
+        is_selected: false 
       };
     });
-    // update the store with the new team and Pokemon data
+    
     setTeam(team);
     setPokemon(team[0]);
-    // next: set is_loading to true in state and navigate to Battle screen
+    
     this.setState({
-      is_loading: true // show activity indicator
+      is_loading: true 
     });
 
-    const username = navigation.getParam("username"); // get the username passed from the login screen
+    const username = navigation.getParam("username"); 
 
     this.pusher = new Pusher("34e87c06e0771c12f0e4", {
       authEndpoint: "https://d46d9f13.ngrok.io/pusher/auth",
@@ -143,8 +143,8 @@ class TeamSelectionScreen extends Component {
       this.my_channel.bind("opponent-found", data => {
         let opponent =
           username == data.player_one.username
-            ? data.player_two // object containing player two's data
-            : data.player_one; // object containing player one's data
+            ? data.player_two 
+            : data.player_one; 
 
         let first_turn =
           username == data.player_one.username

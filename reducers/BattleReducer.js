@@ -2,20 +2,20 @@ import { TEAM_SET, CURRENT_POKEMON_SET, SET_OPPONENT_TEAM, SET_MOVE, SET_OPPONEN
 
 const move_display_text = {
     "wait-for-turn": "",
-    "select-move": "Select your move", // main menu (choose whether to attack or switch)
-    "select-pokemon": "Which Pokemon will you use?", // choose another Pokemon from team
-    "select-pokemon-move": "Which attack will you use?" // choose a move by their current Pokemon
+    "select-move": "Select your move", 
+    "select-pokemon": "Which Pokemon will you use?", 
+    "select-pokemon-move": "Which attack will you use?" 
   };
 
 const default_move = "select-move";
 
 const INITIAL_STATE = {
-    team:[], // the user's Pokemon team
-    pokemon: null, // currently selected pokemon by user (the one being shown in the UI)
+    team:[], 
+    pokemon: null, 
     move: default_move,
     move_display_text: move_display_text[default_move],
     opponent_team: [],
-    opponent_pokemon: null, // currently selected pokemon by opponent
+    opponent_pokemon: null, 
     message: "" 
 };
 
@@ -29,20 +29,20 @@ export default (state = INITIAL_STATE, action) => {
             const pokemon = action.pokemon;
             return { ...state, pokemon};
 
-        case SET_OPPONENT_TEAM: // for setting the opponent's team
+        case SET_OPPONENT_TEAM: 
             return { ...state, opponent_team: action.team };
       
-        case SET_MOVE: // for setting the controls currently displayed in the user's screen
+        case SET_MOVE: 
             const { move } = action; 
             return { ...state, move, move_display_text: move_display_text[move] };
     
-        case SET_OPPONENT_POKEMON: // for setting the opponent's current Pokemon
+        case SET_OPPONENT_POKEMON: 
             const opponent_pokemon = action.pokemon
                 ? action.pokemon
-                : state.opponent_team[0]; // if the action didn't pass a Pokemon, use the first Pokemon in the opponent's team instead
+                : state.opponent_team[0]; 
             return { ...state, opponent_pokemon };
     
-        case SET_OPPONENT_POKEMON_HEALTH: // for updating the opponent's current Pokemon's health
+        case SET_OPPONENT_POKEMON_HEALTH: 
             let opponent_team = [...state.opponent_team];
             opponent_team = opponent_team.map(item => {
                 if (item.team_member_id == action.team_member_id) {
@@ -53,13 +53,13 @@ export default (state = INITIAL_STATE, action) => {
     
         return { ...state, opponent_team };
     
-        case REMOVE_POKEMON_FROM_OPPONENT_TEAM: // for removing a specific Pokemon from opponent's team after it faints (when its HP goes below 1)
+        case REMOVE_POKEMON_FROM_OPPONENT_TEAM: 
             const diminished_opponent_team = [...state.opponent_team].filter(item => {
                 return item.team_member_id != action.team_member_id;
             });
             return { ...state, opponent_team: diminished_opponent_team };
 
-        case SET_POKEMON_HEALTH: // updates the current_hp of the Pokemon with the team_member_id specified in the action
+        case SET_POKEMON_HEALTH: 
             let team_data = [...state.team];
             team_data = team_data.map(item => {
                 if (item.team_member_id == action.team_member_id) {
@@ -72,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
         case SET_MESSAGE: // sets the message to display in place of the controls
             return { ...state, move: "wait-for-turn", message: action.message };
 
-        case REMOVE_POKEMON_FROM_TEAM: // removes the Pokemon with the specified team_member_id from the team
+        case REMOVE_POKEMON_FROM_TEAM: 
             const diminished_team = [...state.team].filter(item => {
                 return item.team_member_id != action.team_member_id;
             });
