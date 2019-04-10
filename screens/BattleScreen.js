@@ -30,6 +30,8 @@ import {
   removePokemonFromOpponentTeam
 } from "../actions";
 
+console.disableYellowBox = true
+
 class BattleScreen extends Component {
   static navigationOptions = {
     header: null
