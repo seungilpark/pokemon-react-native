@@ -1,0 +1,37 @@
+{
+  "name": "RNPokeBattle",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "expo": "^32.0.0",
+    "express": "^4.16.4",
+    "native-base": "^2.12.1",
+    "pusher": "^2.2.0",
+    "pusher-js": "^4.4.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-easy-grid": "^0.2.1",
+    "react-native-elements": "^1.1.0",
+    "react-native-modal": "^9.0.0",
+    "react-native-vector-icons": "^6.4.2",
+    "react-navigation": "^3.6.1",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^5.0.0",
+    "reactotron-react-native": "^3.2.1",
+    "reactotron-redux": "^3.1.0"
+  },
+  "private": true
+}
