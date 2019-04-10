@@ -14,6 +14,7 @@ import moves_data from "../data/moves_data"
 import uniqid from "../helpers/uniqid";
 import shuffleArray from "../helpers/shuffleArray";
 
+console.disableYellowBox = true
 
 class TeamSelectionScreen extends Component {
   static navigationOptions = {
@@ -81,7 +82,6 @@ class TeamSelectionScreen extends Component {
 
   confirmTeam = () => {
     const { selected_pokemon, setTeam, setPokemon, navigation} = this.props;
-
     let team = selected_pokemon.slice(0); 
     let pokemon_ids = [];
     let team_member_ids = [];
@@ -119,7 +119,7 @@ class TeamSelectionScreen extends Component {
     const username = navigation.getParam("username"); 
 
     this.pusher = new Pusher("34e87c06e0771c12f0e4", {
-      authEndpoint: "https://d46d9f13.ngrok.io/pusher/auth",
+      authEndpoint: "https://3f1f9e08.ngrok.io/pusher/auth",
       cluster: "us3",
       encrypted: true,
       auth: {
