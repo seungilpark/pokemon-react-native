@@ -12,7 +12,6 @@ class DexContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("hello");
   return bindActionCreators(ActionCreators, dispatch)
 }
 
