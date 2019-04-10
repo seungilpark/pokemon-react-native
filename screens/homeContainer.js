@@ -51,7 +51,7 @@ class HomeContainer extends Component {
 
   getPokemonListComponent() {
     const pokemons = this.props.pokemons.pokemonResults || []
-    return <PokemonList 	pokemons = { pokemons } getPokemonDetails = {this.getPokemonDetails.bind(this)} />
+    return <PokemonList  pokemons = { pokemons } getPokemonDetails = {this.getPokemonDetails.bind(this)} />
   }
 
   getPokemonDetailComponent() {
@@ -74,17 +74,10 @@ class HomeContainer extends Component {
 
     return <View style={{flex:1}}>
         {appHeader}
-        <View style={styles.inputContainer}>
-            <TextInput
-            style={styles.inputs}
-            placeholder="Add pokemon"
-            />
-        </View>
         <ScrollView style={{flex:1}}>
-            {getMorePokemonButtonComponent}
             {pokemonListComponent}
             {pokemonDetailComponent}
-            
+            {getMorePokemonButtonComponent}
         </ScrollView>
     </View>
   }
@@ -96,32 +89,5 @@ function mapStateToProps(state) {
     pokemonDetails: state.pokemonDetails
   }
 }
-
-const styles = StyleSheet.create({
-    inputContainer: {
-        borderBottomColor: '#F5FCFF',
-        backgroundColor: '#DCDCDC',
-        borderRadius: 50,
-        borderColor: "#ccc",
-        borderWidth: 1,
-        backgroundColor: "#eaeaea",
-        padding: 10,
-        borderBottomWidth: 1,
-        width: "60%",
-        height:70,
-        marginBottom: 10,
-        flexDirection: 'row',
-        alignItems:'center',
-        left: "10%",
-        marginTop: 50,
-    },
-    inputs:{
-        height:45,
-        marginLeft:16,
-        borderBottomColor: '#FFFFFF',
-        flex:1,
-        fontSize: 20
-    },
-  });
 
 export default connect(mapStateToProps)(HomeContainer)
