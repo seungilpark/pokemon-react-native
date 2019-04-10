@@ -41,7 +41,7 @@ export default class LoginScreen extends Component {
         </View>
 
         <View style={styles.main}>
-          <TouchableOpacity onPress={() => this.setState({inputvisiable: true})} style={[styles.buttonContainer, styles.loginButton]}>
+          <TouchableOpacity onPress={() => this.setState({inputvisiable: !this.state.inputvisiable})} style={[styles.buttonContainer, styles.loginButton]}>
             <CustomText styles={styles.buttonText}>Pokémon Battle</CustomText>
           </TouchableOpacity>
           {this.state.inputvisiable && (
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   buttonContainer: {
     height:45,
@@ -161,8 +161,9 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: "#00b5ec",
   },
-  loginText: {
+  buttonText: {
     color: 'white',
+    fontSize: 25
   },
   SigninText: {
     fontSize: 18,
