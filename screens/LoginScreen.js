@@ -55,6 +55,9 @@ export default class LoginScreen extends Component {
           <TouchableOpacity onPress={this.gotodex} style={styles.button}>
             <CustomText styles={styles.buttonText}>Pokémon Dex</CustomText>
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.gotomap} style={styles.button}>
+            <CustomText styles={styles.buttonText}>Pokémon Map</CustomText>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -72,12 +75,19 @@ export default class LoginScreen extends Component {
   };
 
   gotodex = () => {
-      this.props.navigation.navigate("Pokedex", {
-        username
-      });
+      this.props.navigation.navigate("Pokedex");
       this.backgroundSound.stopAsync();
-    }
   };
+
+  gotomap = () => {
+    this.props.navigation.navigate("PokemonMap");
+    this.backgroundSound.stopAsync();
+  };
+
+
+};
+
+  
 
 const styles = {
   container: {

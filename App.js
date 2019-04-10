@@ -5,12 +5,13 @@ import { createStackNavigator, createAppContainer} from "react-navigation";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
 import {createStore, applyMiddleware, combineReducers} from "redux";
-import DexContainer from "./screens/appContainer";
+import DexContainer from "./screens/DexScreen";
 import LoginScreen from "./screens/LoginScreen";
 import BattleScreen from "./screens/BattleScreen";
 import TeamSelectionScreen from "./screens/TeamSelectionScreen";
 import Reactotron from "reactotron-react-native";
 import { reactotronRedux } from "reactotron-redux";
+import PokemonMapScreen from "./screens/pokemonmap"
 
 
 
@@ -28,7 +29,8 @@ const RootStack = createStackNavigator(
     Login: LoginScreen,
     TeamSelect: TeamSelectionScreen,
     Battle: BattleScreen,
-    Pokedex: DexContainer
+    Pokedex: DexContainer,
+    PokemonMap: PokemonMapScreen
   },
   {
     initialRouteName: "Login"
