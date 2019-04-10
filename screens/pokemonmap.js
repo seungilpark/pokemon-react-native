@@ -50,7 +50,7 @@ export default class PokemonMap extends React.Component {
     let randomPokemon = [];
     let nums = new Array(52).fill(1).map((el,ind)=>ind);
     let randomNums = [];
-    while(new Set(randomNums).size < 12){
+    while(new Set(randomNums).size < 15){
       let r = nums[Math.floor(Math.random()*51)];
       randomNums.push(r);
     }
@@ -66,8 +66,8 @@ export default class PokemonMap extends React.Component {
     // add random offsets
     // return new coords obj
     let { latitude, longitude } = coords;
-    let latOffset = parseFloat("0.00" + Math.floor(Math.random() * 50));
-    let lngOffset = parseFloat("0.00" + Math.floor(Math.random() * 50));
+    let latOffset = parseFloat("0.0" + Math.round(Math.random()) + Math.random() * 100);
+    let lngOffset = parseFloat("0.0" + Math.round(Math.random()) + Math.random() * 100);
     if (Math.round(Math.random())) latitude += latOffset;
     else latitude -= latOffset;
      
@@ -89,7 +89,7 @@ export default class PokemonMap extends React.Component {
           key={pokemon.id}
           onPress={() => {this.fetchPokemonDetails(pokemon.url)}}
         >
-          <Image style={{width:20, height:20}} source={pokemon.img} />
+          <Image style={{width:25, height:25}} source={pokemon.img} />
           
         </MapView.Marker>  
       )

@@ -97,7 +97,7 @@ class PokemonDetails extends Component {
             style={{ backgroundColor: "#00b5ec" }}
             position="bottomRight"
             onPress={() => this.props.setDetailModelVisibility(false)}>
-            <Icon name="close" style={{ color: "#263238"  }}/>
+            <Icon name="close" style={{ color: "#fff"  }}/>
           </Fab>
         </Container>
       </Modal>

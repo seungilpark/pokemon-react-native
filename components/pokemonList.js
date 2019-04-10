@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {View, StyleSheet, TextInput} from "react-native"
 import {ListItem} from "react-native-elements"
-import {Button, Text} from "native-base"
+import {Button, Text, Icon } from "native-base"
 
 class PokemonList extends Component {
 
@@ -47,16 +47,16 @@ class PokemonList extends Component {
             <TextInput
             ref={input => { this.textInput = input }}
             style={styles.inputs}
-            placeholder="Search for pokemon"
+            placeholder="Search for a pokemon"
             onChangeText={(text) => this.filterSearch(text)}
             />
         </View>
         <Button 
-            block
-            warning
             onPress={ this.refreshFilter.bind(this) }
-            style={{backgroundColor: "#00b5ec"}}
-        >
+            style={{backgroundColor: "#00b5ec", height: 50, marginBottom: 10}}
+            full
+        >      
+            <Icon name='refresh' />
             <Text style={{ color: "#fff", fontWeight: "bold" }}>
             Refresh Filter
             </Text>
