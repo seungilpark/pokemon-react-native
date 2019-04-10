@@ -42,7 +42,7 @@ export default class LoginScreen extends Component {
 
         <View style={styles.main}>
           <TouchableOpacity onPress={() => this.setState({inputvisiable: true})} style={[styles.buttonContainer, styles.loginButton]}>
-            <CustomText styles={styles.buttonText}>Pokémon Dex</CustomText>
+            <CustomText styles={styles.buttonText}>Pokémon Battle</CustomText>
           </TouchableOpacity>
           {this.state.inputvisiable && (
             <View style={styles.inputContainer}>
