@@ -6,7 +6,7 @@ class PokemonList extends Component {
 
   render() {
     return (
-      <View>
+      <View> 
         { this.props.pokemons.map((pokemon, i) => (
           <ListItem
             button
@@ -14,6 +14,10 @@ class PokemonList extends Component {
             roundAvatar
             key={i}
             title={pokemon.name}
+            chevron={true}
+            bottomDivider={true}
+            titleStyle={{textAlign: "center", fontSize: 20, fontWeight: "bold"}}
+            leftAvatar={{ source: require("../assets/pokedex-icon.png") }}
           />))
         }
       </View>

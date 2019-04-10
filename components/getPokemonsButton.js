@@ -10,8 +10,9 @@ class GetPokemonsButton extends Component {
         block
         warning
         onPress={ this.props.getPokemons }
+        style={{backgroundColor: "#00b5ec", marginTop: 40}}
       >
-        <Text style={{ color: "#263238" }}>
+        <Text style={{ color: "#263238", fontWeight: "bold" }}>
           Get Pokemons
         </Text>
       </Button>

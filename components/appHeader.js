@@ -5,13 +5,14 @@ class AppHeader extends Component {
   render() {
     return (
       <Header
-        backgroundColor="#263238"
+        backgroundColor="#00b5ec"
         height= {100}
         centerComponent={
-          { text: "POKEDEX",
+          { text: "Pokémon Dex",
             style: {
-              color: "#fff",
-              fontSize: 22
+              fontSize: 22,
+              bottom: "50%",
+              fontWeight: "bold",
             }
           }
         }
