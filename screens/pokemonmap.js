@@ -12,6 +12,10 @@ import {
 import MapView from "react-native-maps";
 import { Constants, Location, Permissions } from "expo";
 import pokemonList from '../data/pokemon_list';
+import PokemonDetailsMap from "../components/PokemonDetailsMap"
+import apiClient from "../lib/apiClient"
+
+
 let { width, height } = Dimensions.get("window");
 
 // get random pokemon list [pok1{ name:, img, id, }, pok2 { name, img, id }...]
@@ -32,7 +36,8 @@ export default class PokemonMap extends React.Component {
             longitudeDelta: 0.019624405920505524
       },
       locationPermission: "unknown",
-      randomPokemon:[]
+      randomPokemon:[],
+      isPokemonDetailVisible: false
     };
   }
 
@@ -82,6 +87,7 @@ export default class PokemonMap extends React.Component {
           minDelta={0.5}
           maxDelta={2}
           key={pokemon.id}
+          onPress={() => {this.fetchPokemonDetails(pokemon.url)}}
         >
           <Image style={{width:20, height:20}} source={pokemon.img} />
           
@@ -89,28 +95,32 @@ export default class PokemonMap extends React.Component {
       )
     })
   }
-  componentDidMount() {
-    this._getLocationAsync();
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        let rp = this._getRandomPokemon();
-        // console.log(rp);
-        this.setState({
-          region: {
-            latitude: position["coords"]["latitude"],
-            longitude: position["coords"]["longitude"],
-            latitudeDelta: 0.01500115405027003,
-            longitudeDelta: 0.019624405920505524
-          },
-          randomPokemon:rp 
-        });
-      },
-      error => alert(JSON.stringify(error))
-    );
 
+  setDetailModalVisibility(visibility) {
+    this.setState({isPokemonDetailVisible : visibility})
   }
+
+  async fetchPokemonDetails(url) {
+    return apiClient.get(url).then(resp => {
+        let pokemonDetails = resp
+        this.setState({
+            pokemonDetails: pokemonDetails
+        })
+        this.setDetailModalVisibility(true)
+        }).catch((ex) => {
+        console.log(ex)
+        })
+    }
+
+  getPokemonDetailsMapComponent() {
+    return <PokemonDetailsMap 	pokemonDetails = { this.state.pokemonDetails } 
+      visibility = {this.state.isPokemonDetailVisible}
+      setDetailModelVisibility = {this.setDetailModalVisibility.bind(this)} />
+  }
+
   // {/* onRegionChange={region => this.setState({ region })} */}
   render() {
+    const PokemonDetailMapComponent = this.getPokemonDetailsMapComponent()
     return (
       <View style={styles.container}>
         <MapView
@@ -138,10 +148,28 @@ export default class PokemonMap extends React.Component {
           <Image style={{width:40, height:40}} source={require("../assets/images/pokemon/player.gif")} resizeMode="cover" />
         </MapView.Marker>  
         {this.renderRandomPokemons()}
-
-        
         </MapView>
+        {PokemonDetailMapComponent}
       </View>);
+  }
+
+  componentDidMount() {
+    this._getLocationAsync();
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let rp = this._getRandomPokemon();
+        this.setState({
+          region: {
+            latitude: position["coords"]["latitude"],
+            longitude: position["coords"]["longitude"],
+            latitudeDelta: 0.01500115405027003,
+            longitudeDelta: 0.019624405920505524
+          },
+          randomPokemon:rp 
+        });
+      },
+      error => alert(JSON.stringify(error))
+    );
   }
 }
 
