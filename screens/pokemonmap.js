@@ -1,16 +1,12 @@
 import React from "react";
 import {
-  Button,
-  TextInput,
-  TouchableHighlight,
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions
 } from "react-native";
 import MapView from "react-native-maps";
-import { Constants, Location, Permissions } from "expo";
+import { Permissions } from "expo";
 import pokemonList from '../data/pokemon_list';
 import PokemonDetailsMap from "../components/PokemonDetailsMap"
 import apiClient from "../lib/apiClient"
@@ -57,7 +53,6 @@ export default class PokemonMap extends React.Component {
     randomNums = new Set(randomNums);
     randomNums = [...randomNums];
     randomPokemon =  randomNums.map(num => pokemonList[num]);
-    // console.log(randomPokemon)
     return randomPokemon; 
   }
 

@@ -98,9 +98,6 @@ export default class LoginScreen extends Component {
 
 };
 
-  
-
-
 
 const styles = StyleSheet.create({
   container: {

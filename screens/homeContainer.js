@@ -1,7 +1,7 @@
 import React from "react"
 import { Component } from "react"
 import { connect } from "react-redux"
-import { View, ScrollView, TextInput, StyleSheet } from "react-native"
+import { View, ScrollView } from "react-native"
 import AppHeader from "../components/appHeader"
 import PokemonList from "../components/pokemonList"
 import PokemonDetails from "../components/pokemonDetails"
