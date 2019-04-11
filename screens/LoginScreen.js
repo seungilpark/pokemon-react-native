@@ -98,9 +98,6 @@ export default class LoginScreen extends Component {
 
 };
 
-  
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -163,7 +160,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 25
+    fontSize: 20
   },
   SigninText: {
     fontSize: 18,

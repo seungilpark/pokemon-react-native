@@ -5,7 +5,6 @@ import { Audio } from "expo";
 
 import CustomText from "../components/CustomText";
 import PokemonList from "../components/PokemonList";
-import ActionList from "../components/ActionList";
 
 import { connect } from "react-redux";
 import { setTeam, setPokemon } from "../actions";

@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  Button,
-  TextInput,
-  TouchableHighlight,
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions
 } from "react-native";
 import MapView from "react-native-maps";
-import { Constants, Location, Permissions } from "expo";
+import { Permissions } from "expo";
 import pokemonList from '../data/pokemon_list';
+import PokemonDetailsMap from "../components/PokemonDetailsMap"
+import apiClient from "../lib/apiClient"
+
+
 let { width, height } = Dimensions.get("window");
 
 // get random pokemon list [pok1{ name:, img, id, }, pok2 { name, img, id }...]
@@ -32,7 +32,8 @@ export default class PokemonMap extends React.Component {
             longitudeDelta: 0.019624405920505524
       },
       locationPermission: "unknown",
-      randomPokemon:[]
+      randomPokemon:[],
+      isPokemonDetailVisible: false
     };
   }
 
@@ -45,14 +46,13 @@ export default class PokemonMap extends React.Component {
     let randomPokemon = [];
     let nums = new Array(52).fill(1).map((el,ind)=>ind);
     let randomNums = [];
-    while(new Set(randomNums).size < 12){
+    while(new Set(randomNums).size < 15){
       let r = nums[Math.floor(Math.random()*51)];
       randomNums.push(r);
     }
     randomNums = new Set(randomNums);
     randomNums = [...randomNums];
     randomPokemon =  randomNums.map(num => pokemonList[num]);
-    // console.log(randomPokemon)
     return randomPokemon; 
   }
 
@@ -61,8 +61,8 @@ export default class PokemonMap extends React.Component {
     // add random offsets
     // return new coords obj
     let { latitude, longitude } = coords;
-    let latOffset = parseFloat("0.00" + Math.floor(Math.random() * 50));
-    let lngOffset = parseFloat("0.00" + Math.floor(Math.random() * 50));
+    let latOffset = parseFloat("0.0" + Math.round(Math.random()) + Math.random() * 100);
+    let lngOffset = parseFloat("0.0" + Math.round(Math.random()) + Math.random() * 100);
     if (Math.round(Math.random())) latitude += latOffset;
     else latitude -= latOffset;
      
@@ -82,35 +82,40 @@ export default class PokemonMap extends React.Component {
           minDelta={0.5}
           maxDelta={2}
           key={pokemon.id}
+          onPress={() => {this.fetchPokemonDetails(pokemon.url)}}
         >
-          <Image style={{width:20, height:20}} source={pokemon.img} />
+          <Image style={{width:25, height:25}} source={pokemon.img} />
           
         </MapView.Marker>  
       )
     })
   }
-  componentDidMount() {
-    this._getLocationAsync();
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        let rp = this._getRandomPokemon();
-        // console.log(rp);
-        this.setState({
-          region: {
-            latitude: position["coords"]["latitude"],
-            longitude: position["coords"]["longitude"],
-            latitudeDelta: 0.01500115405027003,
-            longitudeDelta: 0.019624405920505524
-          },
-          randomPokemon:rp 
-        });
-      },
-      error => alert(JSON.stringify(error))
-    );
 
+  setDetailModalVisibility(visibility) {
+    this.setState({isPokemonDetailVisible : visibility})
   }
+
+  async fetchPokemonDetails(url) {
+    return apiClient.get(url).then(resp => {
+        let pokemonDetails = resp
+        this.setState({
+            pokemonDetails: pokemonDetails
+        })
+        this.setDetailModalVisibility(true)
+        }).catch((ex) => {
+        console.log(ex)
+        })
+    }
+
+  getPokemonDetailsMapComponent() {
+    return <PokemonDetailsMap 	pokemonDetails = { this.state.pokemonDetails } 
+      visibility = {this.state.isPokemonDetailVisible}
+      setDetailModelVisibility = {this.setDetailModalVisibility.bind(this)} />
+  }
+
   // {/* onRegionChange={region => this.setState({ region })} */}
   render() {
+    const PokemonDetailMapComponent = this.getPokemonDetailsMapComponent()
     return (
       <View style={styles.container}>
         <MapView
@@ -138,10 +143,28 @@ export default class PokemonMap extends React.Component {
           <Image style={{width:40, height:40}} source={require("../assets/images/pokemon/player.gif")} resizeMode="cover" />
         </MapView.Marker>  
         {this.renderRandomPokemons()}
-
-        
         </MapView>
+        {PokemonDetailMapComponent}
       </View>);
+  }
+
+  componentDidMount() {
+    this._getLocationAsync();
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let rp = this._getRandomPokemon();
+        this.setState({
+          region: {
+            latitude: position["coords"]["latitude"],
+            longitude: position["coords"]["longitude"],
+            latitudeDelta: 0.01500115405027003,
+            longitudeDelta: 0.019624405920505524
+          },
+          randomPokemon:rp 
+        });
+      },
+      error => alert(JSON.stringify(error))
+    );
   }
 }
 

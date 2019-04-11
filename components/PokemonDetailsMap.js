@@ -1,11 +1,11 @@
 import React, {Component} from "react"
-import {Image, StyleSheet} from "react-native"
+import {Image} from "react-native"
 import { Col, Row, Grid } from "react-native-easy-grid"
 import { Container, Content, Text, Icon, Fab, Button } from "native-base"
 import  Modal  from "react-native-modal"
 import {ListItem} from "react-native-elements"
 
-class PokemonDetails extends Component {
+class PokemonDetailsMap extends Component {
 
   constructor(props) {
     super(props)
@@ -34,13 +34,14 @@ class PokemonDetails extends Component {
     }
   }
 
+
   render() {
-    const id = this.state.id
     const name = this.state.name
     const weight = this.state.weight
     const abilities = this.state.abilities
     const image = this.state.images
     const height = this.state.height
+
     return (
       <Modal
         animationType="slide"
@@ -105,4 +106,4 @@ class PokemonDetails extends Component {
   }
 }
 
-export default PokemonDetails
+export default PokemonDetailsMap

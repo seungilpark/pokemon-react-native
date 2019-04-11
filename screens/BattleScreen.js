@@ -16,8 +16,6 @@ import PokemonList from "../components/PokemonList";
 import pokemon_data from "../data/pokemon_data.js";
 import moves_data from "../data/moves_data";
 
-import uniqid from "../helpers/uniqid";
-import randomInt from "../helpers/randomInt";
 import shuffleArray from "../helpers/shuffleArray";
 
 import {
