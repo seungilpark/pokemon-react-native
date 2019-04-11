@@ -81,7 +81,7 @@ const styles = {
   },
   label: {
     paddingBottom: 2,
-    color: "#212121"
+    color: "#ffffff",
   },
   rail: {
     height: 10,
@@ -104,7 +104,7 @@ const styles = {
   },
   percentText: {
     fontSize: 10,
-    color: "#212121"
+    color: "#ffffff"
   }
 };
 

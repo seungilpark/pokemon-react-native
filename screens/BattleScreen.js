@@ -374,7 +374,8 @@ const styles = {
     fontSize: 20,
     marginTop: 50,
     marginBottom: 10,
-    alignSelf: "center"
+    alignSelf: "center",
+    color: "#FFF"
   },
   battleGround: {
     flex: 8,
