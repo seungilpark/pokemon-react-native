@@ -85,7 +85,7 @@ class PokemonDetails extends Component {
                     title={a.ability.name}
                     bottomDivider={true}
                     titleStyle={{textAlign: "center", fontSize: 20}}
-                    leftAvatar={{ source: require("../assets/ability-icon.png") }}
+                    leftAvatar={{ source: require("../assets/aicon.png") }}
                 />))
                 }
             </Grid>

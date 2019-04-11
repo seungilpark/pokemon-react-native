@@ -50,7 +50,7 @@ class PokemonList extends Component {
             placeholder="Search for a pokemon"
             onChangeText={(text) => this.filterSearch(text)}
             />
-        </View>
+          </View>
         <Button 
             onPress={ this.refreshFilter.bind(this) }
             style={{backgroundColor: "#00b5ec", height: 50, marginBottom: 10}}
@@ -71,7 +71,7 @@ class PokemonList extends Component {
             chevron={true}
             bottomDivider={true}
             titleStyle={{textAlign: "center", fontSize: 20, fontWeight: "bold"}}
-            leftAvatar={{ source: require("../assets/pokedex-icon.png") }}
+            leftAvatar={{ source: require("../assets/pokeball.gif") }}
           />))
         }
       </View>
@@ -89,18 +89,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#eaeaea",
         padding: 10,
         borderBottomWidth: 1,
-        width: "60%",
-        height:70,
+        width: "80%",
+        height:50,
         marginBottom: 10,
         flexDirection: 'row',
         alignItems:'center',
-        left: 75,
         marginTop: 25,
         marginBottom: 25,
+        flex:1,
+        left:30
     },
     inputs:{
         height:45,
-        marginLeft:16,
         borderBottomColor: '#FFFFFF',
         flex:1,
         fontSize: 20
