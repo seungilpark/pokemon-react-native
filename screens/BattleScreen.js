@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground} from "react-native";
 
 import { connect } from "react-redux";
 
@@ -213,48 +213,48 @@ class BattleScreen extends Component {
     } = this.props;
 
     return (
+      <ImageBackground source={require("../assets/images/background/bg2.png")} style={{width: '100%', height: '100%'}} resizeMode="cover">
       <View style={styles.container}>
         <CustomText styles={[styles.headerText]}>Fight!</CustomText>
 
-        <View style={styles.battleGround}>
-          {opponent_pokemon && (
-            <View style={styles.opponent}>
-              <HealthBar
-                currentHealth={opponent_pokemon.current_hp}
-                totalHealth={opponent_pokemon.total_hp}
-                label={opponent_pokemon.label}
-              />
-              <PokemonFullSprite
-                pokemon={opponent_pokemon.label}
-                spriteFront={opponent_pokemon.front}
-                spriteBack={opponent_pokemon.back}
-                orientation={"front"}
-                isAlive={opponent_pokemon.current_hp > 0}
-                currentHealth={opponent_pokemon.current_hp}
-              />
-            </View>
-          )}
+          <View style={styles.battleGround}>
+            {opponent_pokemon && (
+              <View style={styles.opponent}>
+                <HealthBar
+                  currentHealth={opponent_pokemon.current_hp}
+                  totalHealth={opponent_pokemon.total_hp}
+                  label={opponent_pokemon.label}
+                />
+                <PokemonFullSprite
+                  pokemon={opponent_pokemon.label}
+                  spriteFront={opponent_pokemon.front}
+                  spriteBack={opponent_pokemon.back}
+                  orientation={"front"}
+                  isAlive={opponent_pokemon.current_hp > 0}
+                  currentHealth={opponent_pokemon.current_hp}
+                />
+              </View>
+            )}
 
-          {pokemon && (
-            <View style={styles.currentPlayer}>
-              <HealthBar
-                currentHealth={pokemon.current_hp}
-                totalHealth={pokemon.total_hp}
-                label={pokemon.label}
-              />
+            {pokemon && (
+              <View style={styles.currentPlayer}>
+                <HealthBar
+                  currentHealth={pokemon.current_hp}
+                  totalHealth={pokemon.total_hp}
+                  label={pokemon.label}
+                />
 
-              <PokemonFullSprite
-                pokemon={pokemon.label}
-                spriteFront={pokemon.front}
-                spriteBack={pokemon.back}
-                orientation={"back"}
-                isAlive={pokemon.current_hp > 0}
-                currentHealth={pokemon.current_hp}
-              />
-            </View>
-          )}
-        </View>
-
+                <PokemonFullSprite
+                  pokemon={pokemon.label}
+                  spriteFront={pokemon.front}
+                  spriteBack={pokemon.back}
+                  orientation={"back"}
+                  isAlive={pokemon.current_hp > 0}
+                  currentHealth={pokemon.current_hp}
+                />
+              </View>
+            )}
+          </View>
         <View style={styles.controls}>
           <View style={styles.controlsHeader}>
             {(move == "select-pokemon" || move == "select-pokemon-move") && (
@@ -303,7 +303,10 @@ class BattleScreen extends Component {
               />
             )}
         </View>
-      </View>
+        
+
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -368,7 +371,6 @@ export default connect(
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: "#fff"
   },
   headerText: {
     fontSize: 20,
